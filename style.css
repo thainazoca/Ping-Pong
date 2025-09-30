@@ -1,1 +1,87 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #343a40;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
 
+.container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    color: #007bff;
+}
+
+.pontuacao {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* O Campo de Jogo */
+.campo {
+    width: 600px;
+    height: 400px;
+    background-color: #212529; /* Campo escuro */
+    border: 5px solid #495057;
+    position: relative; /* FUNDAMENTAL para posicionar a bola e as raquetes */
+    margin: 0 auto 20px auto;
+    overflow: hidden; /* Garante que nada saia da área */
+}
+
+/* As Raquetes */
+.raquete {
+    width: 10px;
+    height: 80px;
+    background-color: white;
+    position: absolute; /* Permite o movimento e o posicionamento exato */
+    top: 50%; /* Posição inicial no meio */
+    transform: translateY(-50%); /* Ajusta para centralizar exatamente */
+}
+
+#jogador1 {
+    left: 10px;
+    /* Para simplificar, esta raquete pode ser controlada pelo computador (IA simples) */
+}
+
+#jogador2 {
+    right: 10px;
+    /* Esta raquete será controlada pelo usuário (setas) */
+}
+
+/* A Bola */
+.bola {
+    width: 15px;
+    height: 15px;
+    background-color: #ffc107; /* Amarelo */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* A posição exata da bola será definida pelo JavaScript */
+}
+
+.message {
+    font-size: 1em;
+    color: #6c757d;
+}
+
+#botaoReiniciar {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
