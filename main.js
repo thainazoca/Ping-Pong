@@ -1,4 +1,4 @@
-// Constantes e Variáveis
+// Variáveis e Constantes
 const campo = document.getElementById('campo');
 const jogador1 = document.getElementById('jogador1');
 const jogador2 = document.getElementById('jogador2');
@@ -15,32 +15,23 @@ const bolaTamanho = 15;
 
 let pontos1 = 0;
 let pontos2 = 0;
-let bolaX, bolaY; // Posição da bola
-let velocidadeX, velocidadeY; // Velocidade da bola (o quanto ela se move por frame)
-let loopJogo; // ID do setInterval
-
-// Posição inicial da raquete do jogador 2
+let bolaX, bolaY;
+let velocidadeX, velocidadeY;
+let loopJogo; 
 let jogador2Y = campoAltura / 2 - raqueteAltura / 2;
-
-// --- Configuração e Reinício do Jogo ---
 
 function reiniciarBola() {
     bolaX = campoLargura / 2 - bolaTamanho / 2;
     bolaY = campoAltura / 2 - bolaTamanho / 2;
     
-    // Inicia a bola se movendo para um lado aleatório
-    velocidadeX = (Math.random() > 0.5 ? 2 : -2); // 2 ou -2 pixels/frame
-    
-    // Velocidade Y aleatória (para dificultar)
-    velocidadeY = (Math.random() * 2 - 1); // Entre -1 e 1
+    velocidadeX = (Math.random() > 0.5 ? 2 : -2);
+    velocidadeY = (Math.random() * 2 - 1); 
 
-    // Posiciona as raquetes no centro
     jogador1.style.top = `${campoAltura / 2 - raqueteAltura / 2}px`;
     jogador2.style.top = `${jogador2Y}px`;
     
-    // Se o jogo não estiver rodando, inicia o loop
     if (!loopJogo) {
-        loopJogo = setInterval(atualizarJogo, 1000 / 60); // 60 frames por segundo (FPS)
+        loopJogo = setInterval(atualizarJogo, 1000 / 60);
     }
 }
 
@@ -55,8 +46,6 @@ function atualizarPontuacao() {
     }
 }
 
-// --- Lógica Principal (O Game Loop) ---
-
 function atualizarJogo() {
     // 1. Mover a Bola
     bolaX += velocidadeX;
@@ -64,34 +53,30 @@ function atualizarJogo() {
 
     // 2. Colisão com o Teto/Chão
     if (bolaY < 0 || bolaY > campoAltura - bolaTamanho) {
-        velocidadeY = -velocidadeY; // Inverte a direção vertical
+        velocidadeY = -velocidadeY;
     }
 
     // 3. Colisão com as Raquetes
     
     // Raquete 1 (IA Simples)
-    // Se a bola estiver perto do lado esquerdo
     if (bolaX <= 20) { 
         let raquete1Y = parseFloat(jogador1.style.top);
         
-        // Verifica se a bola está na altura da raquete
         if (bolaY + bolaTamanho > raquete1Y && bolaY < raquete1Y + raqueteAltura) {
-            velocidadeX = -velocidadeX * 1.05; // Inverte e aumenta a velocidade (aceleração)
+            velocidadeX = -velocidadeX * 1.05;
         }
     }
     
     // Raquete 2 (Jogador Humano)
-    // Se a bola estiver perto do lado direito
     if (bolaX >= campoLargura - 20 - bolaTamanho) {
         let raquete2Y = parseFloat(jogador2.style.top);
 
-        // Verifica se a bola está na altura da raquete
         if (bolaY + bolaTamanho > raquete2Y && bolaY < raquete2Y + raqueteAltura) {
-            velocidadeX = -velocidadeX * 1.05; // Inverte e acelera
+            velocidadeX = -velocidadeX * 1.05;
         }
     }
     
-    // 4. Ponto (A bola saiu pela lateral)
+    // 4. Ponto
     
     // Ponto para Jogador 2
     if (bolaX < 0) {
@@ -107,14 +92,12 @@ function atualizarJogo() {
     }
     
     // 5. Movimento da Raquete 1 (IA)
-    // A raquete 1 tenta seguir a bola (IA muito básica)
     let raquete1Y = parseFloat(jogador1.style.top);
     if (bolaY > raquete1Y + raqueteAltura / 2) {
         raquete1Y += 2;
     } else if (bolaY < raquete1Y + raqueteAltura / 2) {
         raquete1Y -= 2;
     }
-    // Garante que a raquete 1 não saia do campo
     raquete1Y = Math.max(0, Math.min(raquete1Y, campoAltura - raqueteAltura));
     jogador1.style.top = `${raquete1Y}px`;
 
@@ -127,7 +110,7 @@ function atualizarJogo() {
 // --- Controle do Jogador 2 (Teclado) ---
 
 document.addEventListener('keydown', (e) => {
-    const velocidadeRaquetes = 15; // Velocidade de movimento da raquete
+    const velocidadeRaquetes = 15;
     
     if (e.key === 'ArrowUp') {
         jogador2Y -= velocidadeRaquetes;
@@ -135,7 +118,6 @@ document.addEventListener('keydown', (e) => {
         jogador2Y += velocidadeRaquetes;
     }
 
-    // Limita a raquete dentro do campo
     jogador2Y = Math.max(0, Math.min(jogador2Y, campoAltura - raqueteAltura));
 });
 

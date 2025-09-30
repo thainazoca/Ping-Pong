@@ -26,47 +26,41 @@ h1 {
     color: #333;
 }
 
-/* O Campo de Jogo */
 .campo {
     width: 600px;
     height: 400px;
-    background-color: #212529; /* Campo escuro */
+    background-color: #212529;
     border: 5px solid #495057;
-    position: relative; /* FUNDAMENTAL para posicionar a bola e as raquetes */
+    position: relative; 
     margin: 0 auto 20px auto;
-    overflow: hidden; /* Garante que nada saia da área */
+    overflow: hidden; 
 }
 
-/* As Raquetes */
 .raquete {
     width: 10px;
     height: 80px;
     background-color: white;
-    position: absolute; /* Permite o movimento e o posicionamento exato */
-    top: 50%; /* Posição inicial no meio */
-    transform: translateY(-50%); /* Ajusta para centralizar exatamente */
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
 }
 
 #jogador1 {
     left: 10px;
-    /* Para simplificar, esta raquete pode ser controlada pelo computador (IA simples) */
 }
 
 #jogador2 {
     right: 10px;
-    /* Esta raquete será controlada pelo usuário (setas) */
 }
 
-/* A Bola */
 .bola {
     width: 15px;
     height: 15px;
-    background-color: #ffc107; /* Amarelo */
+    background-color: #ffc107;
     border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
-    /* A posição exata da bola será definida pelo JavaScript */
 }
 
 .message {
